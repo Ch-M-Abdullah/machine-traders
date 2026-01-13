@@ -1,0 +1,26 @@
+.navbar-search-container{
+    flex: 1;
+    position: relative;
+    height: 3rem;
+}
+
+.search-bar-input:focus{
+    outline: 0px;
+}
+
+.magnifier{
+    border-radius: 999px;
+    padding-inline: 2%;
+    height: 100%;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    right: 1px;
+    top: 0px;
+}
+
+@media screen and (max-width: 720px) {
+    
+}

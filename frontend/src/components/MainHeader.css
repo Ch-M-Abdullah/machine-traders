@@ -1,0 +1,42 @@
+.main-header-container{
+    background-image: url("https://www.ringpower.com/media/d3wdmeqy/ring-power-utility-truck-crane-grove-rough-terrain-crane.png?entropycrop=128&width=1000");
+    background-size: cover;
+    padding-block: 2%;
+}
+
+.main-header-block{
+    width: 60%;
+    margin: 0px auto;
+    background-color: rgba(236, 240, 241, 0.9);
+    box-sizing: border-box;
+    padding-inline: 5%;
+    padding-block: 2%;
+}
+
+.main-header-block-text{
+    font-size: 2rem;
+}
+
+.categories{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
+    gap: 0px;
+}
+
+.categories span:hover{
+    text-decoration: underline;
+    font-weight: bold;
+}
+
+
+@media screen and (max-width: 720px) {
+    .main-header-block{
+        width: 100%;
+        /* padding-block: 0%; */
+        margin: 0;
+    }
+
+    .main-header-block-text{
+        font-size: 1.5rem;
+    }
+}

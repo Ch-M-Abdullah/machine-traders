@@ -1,0 +1,37 @@
+.navbar-middle-container{
+    margin-bottom: 1%;
+}
+
+.middle-row-content {
+    padding: 10px 30px 10px 15px;
+    width: 50%;
+    margin: 0 auto;
+    align-items: center;
+}
+
+.navbar-search{
+    display: inline-block;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@media screen and (min-width: 1001px) {
+    .site-header .middle-row .middle-row-content {
+        padding: 10px 30px 10px 15px;
+    }
+}
+
+@media screen and (max-width: 1200px) {
+    .middle-row-content{
+        flex-direction: column;
+        width: 100%;
+        padding: 0;
+        align-items: normal;
+    }
+
+    .navbar-middle-container{
+        width: 98%;
+        justify-self: center;
+    }
+}

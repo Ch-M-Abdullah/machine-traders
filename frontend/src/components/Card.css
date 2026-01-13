@@ -1,0 +1,23 @@
+.product-card-container{
+    overflow: hidden;
+    border: 1px solid black;
+    box-shadow: 5px 0px 5px -3px #000;
+}
+
+.product-img{
+    max-width: 100%;
+    object-fit: contain;
+    object-position: center;
+}
+
+.product-name{
+    box-sizing: border-box;
+    overflow: hidden;
+    padding-left: 10%;
+}
+
+.product-price{
+    font-weight: bold;
+    box-sizing: border-box;
+    padding-left: 10%;
+}

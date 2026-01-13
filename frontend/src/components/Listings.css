@@ -1,0 +1,21 @@
+.listing-heading{
+    font-size: 1.2rem;
+}
+
+.listings{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
+    gap: 1rem;
+}
+
+
+/* @media screen and (max-width: 1200px) {
+    .listings{
+        grid-template-columns: minmax(90px, 1fr) minmax(90px, 1fr) minmax(90px, 1fr);
+    }
+}
+@media screen and (max-width: 720px) {
+    .listings{
+        grid-template-columns: minmax(90px, 1fr) minmax(90px, 1fr);
+    }
+} */
