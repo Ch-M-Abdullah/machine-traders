@@ -33,20 +33,20 @@ export default function Hero() {
       )
     );
 
-    console.log(manufacturers.map((man) => man.categories))
-    
+    console.log(manufacturers.map((man) => man.categories));
   }, [selectedCategory]);
 
   if (error) return <p>{error}</p>;
   if (loading) return <p>loading data...</p>;
 
   const gotoListing = (category: string) => {
-    if (!category || category === "") {
-      return;
-    }
-    category = encodeURIComponent(category);
+    const params = new URLSearchParams();
 
-    navigate(`/listing/${category}`);
+    if (category) params.append("category", category);
+
+    const url = `/listing?${params.toString()}`;
+
+    navigate(url);
   };
 
   return (

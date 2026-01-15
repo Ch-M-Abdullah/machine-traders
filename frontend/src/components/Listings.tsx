@@ -1,23 +1,58 @@
-import { useParams } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 import "./Listings.css";
 import Card from "./Card";
-import { useCategories } from "../context/useCategories";
+// import { useCategories } from "../context/useCategories";
+import { useEffect, useState } from "react";
+
+type Product = {
+  _id: string;
+  title: string;
+  image: string;
+  price: number;
+};
 
 export default function Listings() {
-  const { categories: cat, loading, error } = useCategories();
-  const { category } = useParams();
+  // const { categories: cat, loading, error } = useCategories();
+  const [products, setProducts] = useState<Product[]>([]);
+  const [searchParams, _] = useSearchParams();
 
-  if (error) return <p>{error}</p>;
-  if (loading) return <p>loading data...</p>;
+  useEffect(() => {
+    async function fetchProducts() {
+      try {
+        const url = `http://localhost:3000/products?${searchParams.toString()}`;
+
+        const response = await fetch(url);
+
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
+        const data = await response.json();
+
+        // controller returns { success, count, products }
+        setProducts(data.products);
+        console.log("Count of fetched products: ", data.count);
+        console.log("fetched products: ", data.products);
+      } catch (error) {
+        console.error("Failed to fetch products:", error);
+      }
+    }
+    fetchProducts();
+  }, []);
+
   return (
     <>
-      {/* Mock Data */}
       <p className="listing-heading">
-        {"listings > "} {category}
+        {searchParams.get("category")}{" "}
+        {searchParams.get("manufacturer")
+          ? ` > ${searchParams.get("manufacturer")}`
+          : ""}
       </p>
       <div className="listings">
-        {cat.map((category) => {
-          return <Card key={category._id} img={category.img} name={category.name} />;
+        {products.map((product) => {
+          return (
+            <Card key={product._id} img={product.image} name={product.title} />
+          );
         })}
       </div>
     </>

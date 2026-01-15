@@ -14,7 +14,7 @@ function App() {
       <Navbar />
       <Routes>
         <Route path="/" element={<Hero />} />
-        <Route path="/listing/:category" element={<Listings />} />
+        <Route path="/listing" element={<Listings />} />
       </Routes>
     </BrowserRouter>
     </>

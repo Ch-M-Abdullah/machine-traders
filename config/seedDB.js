@@ -1,6 +1,11 @@
 const Category = require("../models/categorySchema");
 const Manufacturer = require("../models/manufacturerSchema");
-const { categories, manufacturers } = require("../dummy-data");
+const Product = require("../models/productSchema");
+const {
+  categories,
+  manufacturers,
+  generateProducts,
+} = require("../dummy-data");
 
 const seedCategoriesIfEmpty = async () => {
   try {
@@ -22,10 +27,10 @@ const seedManufacturersIfEmpty = async () => {
   try {
     // Do notjing if already seeded
     const count = await Manufacturer.countDocuments();
-    if (count > 0){
+    if (count > 0) {
       console.log("Skipping Manufacturer Seeding");
       return;
-    } 
+    }
 
     const categoriesFromDB = await Category.find();
 
@@ -34,7 +39,6 @@ const seedManufacturersIfEmpty = async () => {
     categoriesFromDB.forEach((cat) => {
       categoryMap[cat.name] = cat._id;
     });
-
 
     const manufacturersToInsert = manufacturers.map((manufacturer) => {
       // Replace category names with category IDs
@@ -57,4 +61,49 @@ const seedManufacturersIfEmpty = async () => {
   }
 };
 
-module.exports = {seedCategoriesIfEmpty, seedManufacturersIfEmpty};
+async function seedProducts(count = 100) {
+  try {
+    const existing = await Product.countDocuments();
+
+    if (existing > 0) {
+      console.log("Products already exist. Skipping seed.");
+      return;
+    }
+
+    // USE your existing generator
+    const generatedProducts = generateProducts(count);
+
+    // Normalize for MongoDB schema
+    const productsForDb = generatedProducts.map((p) => ({
+      title: p.title,
+      category: p.category,
+      manufacturer: p.manufacturer,
+      model: p.model,
+      year: p.year,
+      hours: p.hours,
+      condition: p.condition,
+      price: p.price || 1000,
+      location: p.location,
+
+      //  FIRST IMAGE ONLY
+      image: Array.isArray(p.images) ? p.images[0] : "img",
+
+      description: p.description,
+      features: Array.isArray(p.features) ? p.features : [],
+      status: "available",
+    }));
+
+    await Product.insertMany(productsForDb);
+
+    console.log(`Seeded ${productsForDb.length} products`);
+  } catch (error) {
+    console.error("Seeding failed:", error);
+    throw error;
+  }
+}
+
+module.exports = {
+  seedCategoriesIfEmpty,
+  seedManufacturersIfEmpty,
+  seedProducts,
+};

@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const {seedCategoriesIfEmpty, seedManufacturersIfEmpty} = require('./seedDB');
+const {seedCategoriesIfEmpty, seedManufacturersIfEmpty, seedProducts} = require('./seedDB');
 
 const connectDB = async () => {
   try {
@@ -8,6 +8,7 @@ const connectDB = async () => {
     console.log('MongoDB connected');
     await seedCategoriesIfEmpty();
     await seedManufacturersIfEmpty();
+    await seedProducts();
   } catch (error) {
     console.error('MongoDB connection failed:', error.message);
     process.exit(1);

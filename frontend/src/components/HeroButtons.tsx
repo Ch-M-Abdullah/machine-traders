@@ -19,16 +19,15 @@ export default function HeroButtons({
   const navigate = useNavigate();
   const [manufacturer, setManufacturer] = useState("");
 
-  const gotoListing = () => {
-    if (!selectedCategory || selectedCategory === "") {
-      return;
-    }
+  const gotoListing = async () => {
+    const params = new URLSearchParams();
 
-    setSelectedCategory((category) => {
-      let cat = encodeURIComponent(category);
-      navigate(`/listing/${cat}`);
-      return category;
-    });
+    if (selectedCategory) params.append("category", selectedCategory);
+    if (manufacturer) params.append("manufacturer", manufacturer);
+
+    const url = `/listing?${params.toString()}`;
+
+    navigate(url);
   };
 
   return (
