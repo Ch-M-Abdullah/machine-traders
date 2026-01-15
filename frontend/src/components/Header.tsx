@@ -1,4 +1,4 @@
-import "./Header.css";
+import "./Hero.css";
 
 export default function Header() {
   return (

@@ -1,26 +1,28 @@
-import { type Categories } from "../../dummy-data";
-import "./Dropdown.css"
+import { type Category } from "../context/CategoriesContext";
+import { type Manufacturer } from "../api/manufacturers";
+import "./Dropdown.css";
 
 type DropdownProps = {
-  options: Categories[];
+  options: Category[] | Manufacturer[];
   value: string;
-  setCategory: React.Dispatch<React.SetStateAction<string>>;
+  setValue: React.Dispatch<React.SetStateAction<string>>;
 };
 
-export default function Dropdown({
-  options,
-  value,
-  setCategory,
-}: DropdownProps) {
+export default function Dropdown({ options, value, setValue }: DropdownProps) {
   const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    setCategory(event.target.value);
+    setValue(event.target.value);
   };
 
   return (
-    <select value={value} onChange={handleChange} className="dropdown" style={{paddingBlock: "2%"}}>
+    <select
+      value={value}
+      onChange={handleChange}
+      className="dropdown"
+      style={{ paddingBlock: "2%" }}
+    >
       <option value="">Select an option</option>
-      {options.map((option) => (
-        <option key={option.name} value={option.name}>
+      {options.map((option, index) => (
+        <option key={option.name + `${index}`} value={option.name}>
           {option.name}
         </option>
       ))}

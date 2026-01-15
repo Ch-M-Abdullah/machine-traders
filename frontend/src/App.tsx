@@ -1,7 +1,7 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.css";
 import Header from "./components/Header";
-import MainHeader from "./components/MainHeader";
+import Hero from "./components/Hero";
 import Navbar from "./components/Navbar";
 import Listings from "./components/Listings";
 
@@ -13,7 +13,7 @@ function App() {
       <Header />
       <Navbar />
       <Routes>
-        <Route path="/" element={<MainHeader />} />
+        <Route path="/" element={<Hero />} />
         <Route path="/listing/:category" element={<Listings />} />
       </Routes>
     </BrowserRouter>
